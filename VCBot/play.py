@@ -184,5 +184,5 @@ async def stream(client, m: Message):
                )
                add_to_queue(chat_id, "Radio 📻", livelink, link, "Audio", 0)
                await huehue.edit(f"Started Playing **[Radio 📻]({link})** in `{chat_id}` \n Contact @mretinap for support", disable_web_page_preview=True)
-            except Exception as ep: \n Contact @mretinap for support
+            except Exception as ep:
                await huehue.edit(f"`{ep}`")
