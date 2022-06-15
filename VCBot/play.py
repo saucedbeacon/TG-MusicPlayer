@@ -12,11 +12,10 @@ from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 import time
 
-def attempt(ytlink):
- fn = str(int( time.time() )) + ".m4a"
- wget.download(ytlink, fn)
- print("returning")
- return "./" + fn
+def attempt(url):
+ fn = "./" + str(int(time.time()) + ".m4a"
+ os.system('yt-dlp --extract-audio --audio-format m4a --audio-quality 0 "{url}" -o "{fn}"')
+ return fn
 
 def ytsearch(query):
    try:
@@ -110,7 +109,7 @@ async def play(client, m: Message):
                      await huehue.edit(f"Queued at **#{pos}**")
                   else:
                      try:
-                        playable = attempt(ytlink)
+                        playable = attempt(url)
                         await call_py.join_group_call(
                            chat_id,
                            AudioPiped(
@@ -136,7 +135,7 @@ async def play(client, m: Message):
                songname = search[0]
                url = search[1]
                hm, ytlink = await ytdl(url)
-               playable = attempt(ytlink)
+               playable = attempt(url)
                if hm==0:
                   await huehue.edit(f"**YTDL ERROR ⚠️** \n\n`{ytlink}`")
                else:
