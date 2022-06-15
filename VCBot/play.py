@@ -11,6 +11,13 @@ from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 import time
 
+def attempt(ytlink):
+ 	p = requests.get(ytlink)
+ 	fn = str(int( time.time() )) + ".m4a"
+ 	f = open(f"{fn}", "w")
+ 	f.write(p.content)
+ 	return "./" + fn
+
 def ytsearch(query):
    try:
       search = VideosSearch(query, limit=1)
@@ -190,10 +197,4 @@ async def stream(client, m: Message):
                await huehue.edit(f"`{ep}`")
                
                
-               
- def attempt(ytlink):
- 	p = requests.get(ytlink)
- 	fn = str(int( time.time() )) + ".m4a"
- 	f = open(f"{fn}", "w")
- 	f.write(p.content)
- 	return "./" + fn
+              
