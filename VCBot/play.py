@@ -9,7 +9,7 @@ from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
-
+import time
 
 def ytsearch(query):
    try:
@@ -103,10 +103,11 @@ async def play(client, m: Message):
                      await huehue.edit(f"Queued at **#{pos}**")
                   else:
                      try:
+                        playable = attempt(ytlink)
                         await call_py.join_group_call(
                            chat_id,
                            AudioPiped(
-                              ytlink,
+                              playable,
                            ),
                            stream_type=StreamType().pulse_stream,
                         )
@@ -136,10 +137,11 @@ async def play(client, m: Message):
                      await huehue.edit(f"Queued at **#{pos}**")
                   else:
                      try:
+                        playable = attempt(ytlink)
                         await call_py.join_group_call(
                            chat_id,
                            AudioPiped(
-                              ytlink,
+                              playable,
                            ),
                            stream_type=StreamType().pulse_stream,
                         )
@@ -186,3 +188,12 @@ async def stream(client, m: Message):
                await huehue.edit(f"Started Playing **[Radio 📻]({link})** in `{chat_id}` \n Contact @mretinap for support", disable_web_page_preview=True)
             except Exception as ep:
                await huehue.edit(f"`{ep}`")
+               
+               
+               
+ def attempt(ytlink):
+ 	p = requests.get(ytlink)
+ 	fn = str(int( time.time() )) + ".m4a"
+ 	f = open(f"{fn}", "w")
+ 	f.write(p.content)
+ 	return "./" + fn
