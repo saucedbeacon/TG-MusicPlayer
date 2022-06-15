@@ -2,6 +2,7 @@ import os
 import re
 import asyncio
 from pyrogram import Client
+import requests
 from VCBot.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter, GRPPLAY
 from pyrogram import filters
