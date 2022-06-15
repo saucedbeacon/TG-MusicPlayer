@@ -2,7 +2,7 @@ import os
 import re
 import asyncio
 from pyrogram import Client
-import requests
+import wget
 from VCBot.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter, GRPPLAY
 from pyrogram import filters
@@ -13,10 +13,8 @@ from youtubesearchpython import VideosSearch
 import time
 
 def attempt(ytlink):
- 	p = requests.get(ytlink)
  	fn = str(int( time.time() )) + ".m4a"
- 	f = open(f"{fn}", "wb")
- 	f.write(p.content)
+  wget.download(ytlink, fn)
   print("returning")
  	return "./" + fn
 
