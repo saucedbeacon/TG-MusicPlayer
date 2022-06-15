@@ -136,15 +136,15 @@ async def play(client, m: Message):
                songname = search[0]
                url = search[1]
                hm, ytlink = await ytdl(url)
+               playable = attempt(ytlink)
                if hm==0:
                   await huehue.edit(f"**YTDL ERROR ⚠️** \n\n`{ytlink}`")
                else:
                   if chat_id in QUEUE:
-                     pos = add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
+                     pos = add_to_queue(chat_id, songname, playable, url, "Audio", 0)
                      await huehue.edit(f"Queued at **#{pos}**")
                   else:
                      try:
-                        playable = attempt(ytlink)
                         await call_py.join_group_call(
                            chat_id,
                            AudioPiped(
@@ -152,7 +152,7 @@ async def play(client, m: Message):
                            ),
                            stream_type=StreamType().pulse_stream,
                         )
-                        add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
+                        add_to_queue(chat_id, songname, playable, url, "Audio", 0)
                         await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({url}) \n**💬 CHAT** : `{chat_id}` \n Contact @mretinap for support", disable_web_page_preview=True)
                      except Exception as ep:
                         await huehue.edit(f"`{ep}`")
