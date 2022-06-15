@@ -15,7 +15,7 @@ import time
 def attempt(ytlink):
  	p = requests.get(ytlink)
  	fn = str(int( time.time() )) + ".m4a"
- 	f = open(f"{fn}", "w")
+ 	f = open(f"{fn}", "wb")
  	f.write(p.content)
   print("returning")
  	return "./" + fn
