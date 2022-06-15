@@ -14,7 +14,7 @@ import time
 
 def attempt(url):
  fn = "./" + str(int(time.time()) + ".m4a"
- os.system('yt-dlp --extract-audio --audio-format m4a --audio-quality 0 "{url}" -o "{fn}"')
+ os.system('yt-dlp --extract-audio --audio-format m4a --audio-quality 0 \"{url}\" -o \"{fn}\"')
  return fn
 
 def ytsearch(query):
